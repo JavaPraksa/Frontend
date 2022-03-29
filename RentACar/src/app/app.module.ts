@@ -15,12 +15,14 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponent } from './login/login.component';
+import { RegistrationComponent } from './registration/registration.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    LoginComponent
+    LoginComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
