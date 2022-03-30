@@ -14,42 +14,46 @@
                 <p>
                     <mat-form-field appearance="legacy" style="width: 100%;">
                         <mat-label>First Name</mat-label>
-                        <input type="text" matInput placeholder="first name">
+                        <input type="text" matInput placeholder="first name" [(ngModel)]="user.firstName">
                     </mat-form-field>
                 </p>
                 <p>
                     <mat-form-field appearance="legacy" style="width: 100%;">
                         <mat-label>Last Name</mat-label>
-                        <input type="text" matInput placeholder="last name">
+                        <input type="text" matInput placeholder="last name" [(ngModel)]="user.lastName">
                     </mat-form-field>
                 </p>
                 <p>
                     <mat-form-field appearance="legacy" style="width: 100%;">
                         <mat-label>Email</mat-label>
-                        <input type="text" matInput placeholder="email">
+                        <input type="text" matInput placeholder="email" required [(ngModel)]="user.email" [formControl]="email">
+                        <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
                     </mat-form-field>
                 </p>
                 <p>
                     <mat-form-field appearance="legacy" style="width: 100%;">
                         <mat-label>Username</mat-label>
-                        <input type="text" matInput placeholder="username">
+                        <input type="text" matInput placeholder="username" required [(ngModel)]="user.username" [formControl]="username">
+                        <mat-error *ngIf="username.invalid">{{getUsernameErrorMessage()}}</mat-error>
                     </mat-form-field>
                 </p>
                 <p>
                     <mat-form-field appearance="legacy" style="width: 100%;">
                         <mat-label>Password</mat-label>
-                        <input type="password" matInput placeholder="password">
+                        <input type="password" matInput placeholder="password" required [(ngModel)]="user.password" [formControl]="password">
+                        <mat-error *ngIf="password.invalid">{{getPasswordErrorMessage()}}</mat-error>
                     </mat-form-field>
                 </p>
                 <p>
                     <mat-form-field appearance="legacy" style="width: 100%;">
                         <mat-label>Confirm Password</mat-label>
-                        <input type="password" matInput placeholder="confirm password">
+                        <input type="password" matInput placeholder="confirm password" required [(ngModel)]="user.confirmPassword" [formControl]="confirmPassword">
+                        <mat-error *ngIf="confirmPassword.invalid">{{getConfirmPassErrorMessage()}}</mat-error>
                     </mat-form-field>
                 </p>
                 <br>
                 <div style="text-align: center;">
-                    <button mat-raised-button color="primary">
+                    <button mat-raised-button color="primary" [disabled]="email.invalid || username.invalid || password.invalid || confirmPassword.invalid" (click)="register()">
                         Register
                     </button>
                     <br>

@@ -27,7 +27,8 @@ export class LoginComponent implements OnInit {
         this.redirectUser(data.role);
       },
       (error)=>{
-        this._snackBar.open('Wrong username or password', 'X', {
+        console.log(error)
+        this._snackBar.open(error.error.message, 'X', {
           duration: 2000,
           verticalPosition: 'top',
           horizontalPosition: 'end'
