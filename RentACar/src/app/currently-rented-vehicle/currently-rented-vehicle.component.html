@@ -37,7 +37,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <button mat-raised-button color="primary">
+                                    <button mat-raised-button color="primary" (click)="toggleModal()">
                                         Finish rent
                                     </button>
                                 </td>
@@ -47,10 +47,44 @@
                 </div>
                 <div class="column is-half">
                     <figure class="image is-square is-fullwidth">
-                        <img src="../../assets/images/map_example.png">
+                        <img src="../../assets/images/map-singlepin.jpg">
                     </figure>
                 </div>
             </div>
         </div>
     </section>
+</div>
+
+<div class="modal" [ngClass]="{ 'is-active' : isModalActive }">
+    <div class="modal-background" (click)="toggleModal()"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title">Finish rent</p>
+            <button class="delete" aria-label="close" (click)="toggleModal()"></button>
+        </header>
+        <section class="modal-card-body has-text-left">
+            <figure class="image is-square is-fullwidth">
+                <img src="../../assets/images/map-singlepin.jpg">
+            </figure>
+            <br>
+            <mat-form-field appearance="fill">
+                <mat-label>Select address</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let address of addresses" [value]="address.id">
+                        {{address.street}} {{address.houseNumber}},
+                        {{address.town}}, {{address.country}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+        </section>
+        <footer class="modal-card-foot">
+            <button mat-raised-button color="primary" (click)="finishRent()" style="margin-right: 2%;">
+                Finish rent
+            </button>
+            <button mat-raised-button (click)="toggleModal()">
+                Close
+            </button>
+        </footer>
+    </div>
 </div>
