@@ -69,7 +69,7 @@
             <br>
             <mat-form-field appearance="fill">
                 <mat-label>Select address</mat-label>
-                <mat-select>
+                <mat-select [(value)]="selectedAddress">
                     <mat-option *ngFor="let address of addresses" [value]="address.id">
                         {{address.street}} {{address.houseNumber}},
                         {{address.town}}, {{address.country}}

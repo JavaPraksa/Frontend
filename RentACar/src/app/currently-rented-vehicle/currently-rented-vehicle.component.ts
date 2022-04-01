@@ -15,6 +15,7 @@ export class CurrentlyRentedVehicleComponent implements OnInit {
   rentedVehicle: any;
   isModalActive = false;
   addresses: any;
+  selectedAddress: any;
 
   ngOnInit(): void {
     if (sessionStorage.getItem('userId') == null) {
@@ -63,6 +64,13 @@ export class CurrentlyRentedVehicleComponent implements OnInit {
   }
 
   finishRent(){
-
+    this.rentService.finishRent({rentId: this.rentedVehicle.rentId, addressId: this.selectedAddress}).subscribe(
+      (data)=>{
+        this.router.navigate(['']);
+      },
+      ()=>{
+        this.toastr.error("Finishing rent goes wrong")
+      }
+    )
   }
 }
