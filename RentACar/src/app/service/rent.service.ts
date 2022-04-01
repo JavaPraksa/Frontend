@@ -22,6 +22,14 @@ export class RentService {
       headers: new HttpHeaders()
         .set('Authorization', `${sessionStorage.getItem('token')}`)
     }
-    return this.http.get(vehicleServiceApi + 'rent/getAllGarages', header)
+    return this.http.get(vehicleServiceApi + 'rent/get-all-garages', header)
+  }
+
+  finishRent(finishRent: any) {
+    var header = {
+      headers: new HttpHeaders()
+        .set('Authorization', `${sessionStorage.getItem('token')}`)
+    }
+    return this.http.put<any>(vehicleServiceApi + 'rent/finish', finishRent, header)
   }
 }
