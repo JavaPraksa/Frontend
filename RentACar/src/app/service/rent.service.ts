@@ -16,4 +16,12 @@ export class RentService {
     }
     return this.http.get(vehicleServiceApi + 'rent/currently-rented-vehicle?clientId=' + userId, header)
   }
+
+  getAllGarages() {
+    var header = {
+      headers: new HttpHeaders()
+        .set('Authorization', `${sessionStorage.getItem('token')}`)
+    }
+    return this.http.get(vehicleServiceApi + 'rent/getAllGarages', header)
+  }
 }

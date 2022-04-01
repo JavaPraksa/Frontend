@@ -13,24 +13,41 @@ export class CurrentlyRentedVehicleComponent implements OnInit {
   constructor(private rentService: RentService, private router: Router, private toastr: ToastrService,) { }
 
   rentedVehicle: any;
+  isModalActive = false;
+  addresses: any;
 
   ngOnInit(): void {
     if (sessionStorage.getItem('userId') == null) {
       this.router.navigate([''])
     }
     else {
-      this.rentService.getCurrentlyRentedVehicleForUser(sessionStorage.getItem('userId')).subscribe(
-        (data) => {
-          this.rentedVehicle = data;
-          let dateTime = this.rentedVehicle.startTime
-          this.rentedVehicle.startTime = new Date(dateTime[0], dateTime[1]-1, dateTime[2], dateTime[3], dateTime[4])
-        },
-        (error) => {
-          this.toastr.error(error.error.message)
-          this.router.navigate([''])
-        }
-      )
+      this.getRentedVehicle();
+      this.getAllAddresses();
     }
+  }
+  getAllAddresses() {
+    this.rentService.getAllGarages().subscribe(
+      (data)=>{
+        this.addresses = data
+      },
+      (error)=>{
+        this.addresses = []
+      }
+    )
+  }
+
+  getRentedVehicle() {
+    this.rentService.getCurrentlyRentedVehicleForUser(sessionStorage.getItem('userId')).subscribe(
+      (data) => {
+        this.rentedVehicle = data;
+        let dateTime = this.rentedVehicle.startTime;
+        this.rentedVehicle.startTime = new Date(dateTime[0], dateTime[1] - 1, dateTime[2], dateTime[3], dateTime[4]);
+      },
+      (error) => {
+        this.toastr.error(error.error.message);
+        this.router.navigate(['']);
+      }
+    );
   }
 
   getCurrentDuration(){
@@ -39,5 +56,13 @@ export class CurrentlyRentedVehicleComponent implements OnInit {
 
   getCurrentPrice(){
     return this.getCurrentDuration() * this.rentedVehicle.price
+  }
+
+  toggleModal(){
+    this.isModalActive = !this.isModalActive
+  }
+
+  finishRent(){
+
   }
 }
