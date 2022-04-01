@@ -1,0 +1,23 @@
+<div id="basics">
+   <!-- <img class="image" [src]=""/>-->
+    <h1>{{user.firstName + ' ' + user.lastName}}</h1>
+  </div>
+  
+  <form>
+      <div>
+          <label for ="firstName">First Name: {{user.firstName}}</label>
+          
+          <label for = "lastName">Last Name: {{user.lastName}}</label>
+
+          <label for="username">Username: {{user.username}}</label>
+         
+          <label for="email">Email:  {{user.email}}</label>
+         
+         
+      </div>
+    
+      
+  
+    </form>
+    <button (click)="logOut()">Log out</button>
+  

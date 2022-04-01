@@ -20,13 +20,16 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +44,11 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatFormFieldModule,
     MatInputModule,
     MatToolbarModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    RouterModule.forRoot([
+      {path: 'user-profile', component: UserProfileComponent},
+      
+    ]),
 
   ],
   providers: [],

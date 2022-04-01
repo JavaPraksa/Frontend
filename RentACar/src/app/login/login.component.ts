@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
       this.router.navigate([''])
     }
     else{
-      this.router.navigate([''])
+      this.router.navigate(['user-profile'])
     }
   }
 
