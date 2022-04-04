@@ -12,6 +12,10 @@ export class VehicleService {
   constructor(private http: HttpClient) { }
 
   getAvailableVehicles(): Observable<Vehicle[]> {
-    return this.http.get<Vehicle[]>(vehicleServiceApi + 'vehicle/available-vehicles')
+    var header = {
+      headers: new HttpHeaders()
+        .set('Authorization', `${sessionStorage.getItem('token')}`)
+    }
+    return this.http.get<Vehicle[]>(vehicleServiceApi + 'vehicle/available-vehicles', header)
   }
 }
