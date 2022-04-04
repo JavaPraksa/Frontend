@@ -1,10 +1,9 @@
-<div id="basics">
-   <!-- <img class="image" [src]=""/>-->
-    <h1>{{user.firstName + ' ' + user.lastName}}</h1>
-  </div>
+<div >
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">  
   
   <form>
       <div>
+        <h3>Logged user:</h3>
           <label for ="firstName">First Name: {{user.firstName}}</label>
           
           <label for = "lastName">Last Name: {{user.lastName}}</label>
@@ -19,5 +18,6 @@
       
   
     </form>
+
     <button (click)="logOut()">Log out</button>
-  
+  </div>
