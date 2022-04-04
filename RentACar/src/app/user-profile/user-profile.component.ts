@@ -29,12 +29,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   grabUser(): Observable<User> {
-   // this.userService.login(this.loginUser).subscribe(
-     // (data : any)=>{
       let logovani = sessionStorage.getItem('token')
-     //   sessionStorage.setItem('role', data.role)
-
-
     return this.http.get<User>('http://localhost:8082/user/' + sessionStorage.getItem('username'));
   }
 
