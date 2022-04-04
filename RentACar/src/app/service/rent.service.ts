@@ -22,7 +22,7 @@ export class RentService {
       headers: new HttpHeaders()
         .set('Authorization', `${sessionStorage.getItem('token')}`)
     }
-    return this.http.get(vehicleServiceApi + 'rent/get-all-garages', header)
+    return this.http.get(vehicleServiceApi + 'rent/garages', header)
   }
 
   finishRent(finishRent: any) {

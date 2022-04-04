@@ -11,7 +11,8 @@ const routes: Routes = [
   { path: 'registration', component: RegistrationComponent },
   { path: 'user-profile',component : UserProfileComponent},
   { path: 'available-cars', component: AvailableCarsDisplayComponent },
-  { path: 'rentedVehicle', component: CurrentlyRentedVehicleComponent },
+  { path: 'rented-vehicle', component: CurrentlyRentedVehicleComponent },
+  { path: '', pathMatch: 'full', redirectTo: 'rented-vehicle' },
 ];
 
 @NgModule({

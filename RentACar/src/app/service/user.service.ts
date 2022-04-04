@@ -22,5 +22,7 @@ export class UserService {
     return this.http.post(userServiceApi + 'user/register', user)
   }
 
-  
+  logout() {
+    return this.http.put(userServiceApi + 'auth/logout', null)
+  }
 }

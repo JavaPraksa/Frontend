@@ -19,7 +19,7 @@ export class CurrentlyRentedVehicleComponent implements OnInit {
 
   ngOnInit(): void {
     if (sessionStorage.getItem('userId') == null) {
-      this.router.navigate([''])
+      this.router.navigate(['login'])
     }
     else {
       this.getRentedVehicle();
@@ -45,8 +45,8 @@ export class CurrentlyRentedVehicleComponent implements OnInit {
         this.rentedVehicle.startTime = new Date(dateTime[0], dateTime[1] - 1, dateTime[2], dateTime[3], dateTime[4]);
       },
       (error) => {
-        this.toastr.error(error.error.message);
-        this.router.navigate(['']);
+        //this.toastr.error(error.error.message);
+        this.router.navigate(['available-cars']);
       }
     );
   }
@@ -64,9 +64,13 @@ export class CurrentlyRentedVehicleComponent implements OnInit {
   }
 
   finishRent(){
+    if(this.selectedAddress == null || this.selectedAddress == undefined){
+      this.toastr.warning("Must select address")
+      return;
+    }
     this.rentService.finishRent({rentId: this.rentedVehicle.rentId, addressId: this.selectedAddress}).subscribe(
       (data)=>{
-        this.router.navigate(['']);
+        this.router.navigate(['available-cars']);
       },
       ()=>{
         this.toastr.error("Finishing rent goes wrong")
