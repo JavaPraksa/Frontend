@@ -1,6 +1,7 @@
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+//import { profile } from 'console';
 import { userServiceApi } from '../app.consts';
 import { LoginUser } from '../login/LoginUser';
 import { User } from '../registration/User';
@@ -20,4 +21,6 @@ export class UserService {
   register(user: User) {
     return this.http.post(userServiceApi + 'user/register', user)
   }
+
+  
 }
