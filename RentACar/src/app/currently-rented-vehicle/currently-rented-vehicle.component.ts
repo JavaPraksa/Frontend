@@ -1,21 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { RentService } from '../service/rent.service';
+import { } from 'googlemaps';
+import { ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-currently-rented-vehicle',
   templateUrl: './currently-rented-vehicle.component.html',
   styleUrls: ['./currently-rented-vehicle.component.css']
 })
-export class CurrentlyRentedVehicleComponent implements OnInit {
+export class CurrentlyRentedVehicleComponent implements OnInit, AfterViewInit {
+
+  @ViewChild('map') mapElement: any;
+  map!: google.maps.Map;
+
+  @ViewChild('mapModal') mapModalElement: any;
+  mapModal!: google.maps.Map;
 
   constructor(private rentService: RentService, private router: Router, private toastr: ToastrService,) { }
+  ngAfterViewInit(): void {
+    this.initmap()
+  }
 
   rentedVehicle: any;
   isModalActive = false;
   addresses: any;
   selectedAddress: any;
+  modalMarker : any;
 
   ngOnInit(): void {
     if (sessionStorage.getItem('userId') == null) {
@@ -26,12 +38,46 @@ export class CurrentlyRentedVehicleComponent implements OnInit {
       this.getAllAddresses();
     }
   }
+  initmap() {
+    const mapProperties = {
+      center: new google.maps.LatLng(45.251735, 19.837080),
+      zoom: 13,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    this.map = new google.maps.Map(this.mapElement.nativeElement, mapProperties);
+    this.mapModal = new google.maps.Map(this.mapModalElement.nativeElement, mapProperties);
+    this.createMarkers();
+    this.createMarkerForSelectedAddress();
+  }
+
+  createMarkerForSelectedAddress() {
+    if(this.modalMarker != null || this.modalMarker != undefined)
+      this.modalMarker.setMap(null)
+    this.modalMarker = null
+
+    var address = this.addresses.filter((a:any)=>a.id == this.selectedAddress)[0]
+    var data = { lat: address.latitude, lng: address.longitude }
+
+    this.modalMarker = new google.maps.Marker({
+      position: data,
+      map: this.mapModal
+    })
+  }
+
+  createMarkers() {
+    var data = { lat: this.rentedVehicle.latitude, lng: this.rentedVehicle.longitude }
+
+    var marker = new google.maps.Marker({
+      position: data,
+      map: this.map
+    })
+  }
   getAllAddresses() {
     this.rentService.getAllGarages().subscribe(
-      (data)=>{
+      (data) => {
         this.addresses = data
       },
-      (error)=>{
+      (error) => {
         this.addresses = []
       }
     )
@@ -51,28 +97,28 @@ export class CurrentlyRentedVehicleComponent implements OnInit {
     );
   }
 
-  getCurrentDuration(){
-    return Math.ceil((new Date().getTime() - this.rentedVehicle.startTime.getTime())/ (1000 * 3600 * 24));
+  getCurrentDuration() {
+    return Math.ceil((new Date().getTime() - this.rentedVehicle.startTime.getTime()) / (1000 * 3600 * 24));
   }
 
-  getCurrentPrice(){
+  getCurrentPrice() {
     return this.getCurrentDuration() * this.rentedVehicle.price
   }
 
-  toggleModal(){
+  toggleModal() {
     this.isModalActive = !this.isModalActive
   }
 
-  finishRent(){
-    if(this.selectedAddress == null || this.selectedAddress == undefined){
+  finishRent() {
+    if (this.selectedAddress == null || this.selectedAddress == undefined) {
       this.toastr.warning("Must select address")
       return;
     }
-    this.rentService.finishRent({rentId: this.rentedVehicle.rentId, addressId: this.selectedAddress}).subscribe(
-      (data)=>{
+    this.rentService.finishRent({ rentId: this.rentedVehicle.rentId, addressId: this.selectedAddress }).subscribe(
+      (data) => {
         this.router.navigate(['available-cars']);
       },
-      ()=>{
+      () => {
         this.toastr.error("Finishing rent goes wrong")
       }
     )
