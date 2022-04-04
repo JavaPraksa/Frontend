@@ -46,11 +46,8 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="column is-half">
-                    <figure class="image is-square is-fullwidth">
-                        <img src="../../assets/images/map-singlepin.jpg">
-                    </figure>
-                </div>
+                <div class="column is-half" #map style="padding-inline: 1%;"></div>
+
             </div>
         </div>
     </section>
@@ -64,15 +61,13 @@
             <button class="delete" aria-label="close" (click)="toggleModal()"></button>
         </header>
         <section class="modal-card-body has-text-left">
-            <figure class="image is-square is-fullwidth">
-                <img src="../../assets/images/map-singlepin.jpg">
-            </figure>
+            <div class="column is-fullwidth" #mapModal style="height: 400px; padding-inline: 1%;"></div>
             <br>
             <mat-form-field appearance="fill">
                 <mat-label>Select address</mat-label>
-                <mat-select [(value)]="selectedAddress" required>
+                <mat-select [(value)]="selectedAddress" (selectionChange)="createMarkerForSelectedAddress()">
                     <mat-option *ngFor="let address of addresses" [value]="address.id">
-                        {{address.street}} {{address.houseNumber}},
+                        {{address.id}}       {{address.street}} {{address.houseNumber}},
                         {{address.town}}, {{address.country}}
                     </mat-option>
                 </mat-select>
