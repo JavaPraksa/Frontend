@@ -10,11 +10,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
 
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponent } from './login/login.component';
@@ -22,6 +24,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { RouterModule } from '@angular/router';
+import { AvailableCarsDisplayComponent } from './available-cars-display/available-cars-display.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,8 @@ import { RouterModule } from '@angular/router';
     NavbarComponent,
     LoginComponent,
     RegistrationComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    AvailableCarsDisplayComponent
   ],
   imports: [
     BrowserModule,
@@ -45,9 +49,10 @@ import { RouterModule } from '@angular/router';
     MatInputModule,
     MatToolbarModule,
     MatSnackBarModule,
+    MatIconModule,
+    MatSelectModule,
     RouterModule.forRoot([
       {path: 'user-profile', component: UserProfileComponent},
-      
     ]),
 
   ],

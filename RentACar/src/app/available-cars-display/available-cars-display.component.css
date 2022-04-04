@@ -1,0 +1,68 @@
+mat-grid-tile {
+  background: lightblue;
+}
+
+.flex-container {
+box-sizing: border-box;
+display: flex;
+flex-wrap: wrap;
+text-align: center;
+}
+
+.flex-item-left {
+box-sizing: border-box;
+padding: 10px;
+flex: 60%;
+}
+
+.flex-item-right {
+box-sizing: border-box;
+padding: 10px;
+flex: 40%;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 5px 10px #e1e5ee;
+  background-color: white;
+  text-align: left;
+  overflow: hidden;
+}
+
+thead{  
+  box-shadow: 0 5px 10px #e1e5ee;
+}
+
+th{
+  padding: 1rem 2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  font-size: 0.7rem;
+  font-weight: 900;
+}
+
+td{
+  padding: 1rem 2rem;
+}
+
+img {
+  
+  box-shadow: 0 5px 10px #e1e5ee;
+}
+
+tr:nth-child(even){
+  background-color: #f4f6fb;
+}
+
+.price {
+  text-align: right;
+}
+
+
+/* Responsive layout - makes a one column-layout instead of a two-column layout */
+@media (max-width: 1200px) {
+.flex-item-right, .flex-item-left {
+  flex: 100%;
+}
+}
