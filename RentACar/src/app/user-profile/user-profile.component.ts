@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { User } from '../dto/user';
+import { User } from '../registration/User';
 import { userServiceApi } from '../app.consts';
 import { Observable } from 'rxjs';
 import { UserService } from '../service/user.service';
@@ -24,14 +24,9 @@ export class UserProfileComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.grabUser().subscribe(data => {this.user = data;})
-    
+    this.userService.grabUser().subscribe(data=>{this.user=data;})
   }
 
-  grabUser(): Observable<User> {
-      let logovani = sessionStorage.getItem('token')
-    return this.http.get<User>('http://localhost:8082/user/' + sessionStorage.getItem('username'));
-  }
 
   logOut() {
     sessionStorage.clear();
