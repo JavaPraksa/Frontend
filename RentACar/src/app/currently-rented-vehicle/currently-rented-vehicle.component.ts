@@ -92,7 +92,7 @@ export class CurrentlyRentedVehicleComponent implements OnInit, AfterViewInit {
       },
       (error) => {
         //this.toastr.error(error.error.message);
-        //this.router.navigate(['available-cars']);
+        this.router.navigate(['available-cars']);
       }
     );
   }

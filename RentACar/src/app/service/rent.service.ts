@@ -32,4 +32,13 @@ export class RentService {
     }
     return this.http.put<any>(vehicleServiceApi + 'rent/finish', finishRent, header)
   }
+
+  startRent(vid: number) {
+    var header = {
+      headers: new HttpHeaders()
+        .set('Authorization', `${sessionStorage.getItem('token')}`)
+    }
+    var userId = sessionStorage.getItem('userId');
+    return this.http.post<any>(vehicleServiceApi + 'rent/new', {clientId: userId, vehicleId: vid}, header);
+  }
 }

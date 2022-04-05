@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { RentService } from '../service/rent.service';
 import { VehicleService } from '../service/vehicle.service';
 import { Address } from './Address';
 import { Vehicle } from './Vehicle';
@@ -15,15 +16,15 @@ export class AvailableCarsDisplayComponent implements OnInit, AfterViewInit {
 
   public searchText: string = "";
   vehicles: Vehicle[] = [];
-  address : Address = {country:"", houseNumber:"", latitude:0, longitude:0, street:"", town:""};
-  selectedVehicle: Vehicle = {id: 0, model:'', details:'', price:0, address: this.address};
-  
+  address: Address = { country: "", houseNumber: "", latitude: 0, longitude: 0, street: "", town: "" };
+  selectedVehicle: Vehicle = { id: 0, model: '', details: '', price: 0, address: this.address };
+
   isModalActive = false;
 
   @ViewChild('map') mapElement: any;
   map!: google.maps.Map;
 
-  constructor(private vehicleService: VehicleService, private router: Router) { }
+  constructor(private vehicleService: VehicleService, private rentService: RentService, private router: Router) { }
 
   ngAfterViewInit(): void {
     this.initmap()
@@ -62,15 +63,22 @@ export class AvailableCarsDisplayComponent implements OnInit, AfterViewInit {
     }
   }
 
-  toggleModal(){
+  toggleModal() {
     this.isModalActive = !this.isModalActive
   }
 
-  showVehicle(vehicle: Vehicle){
+  showVehicle(vehicle: Vehicle) {
     this.selectedVehicle = vehicle;
     this.isModalActive = true;
   }
 
- 
+  rentVehicle(vehicleId: number) {
+    var isSuccess = false;
+    this.rentService.startRent(vehicleId).subscribe((data)=>{ isSuccess = data;});
+
+    this.router.navigate(['rented-vehicle']);
+  }
+
+
 
 }

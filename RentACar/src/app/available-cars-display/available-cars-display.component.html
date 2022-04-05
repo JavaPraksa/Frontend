@@ -70,7 +70,7 @@
             <mat-card-actions>
                 <span style="margin-block: 5%;"><span style="font-size: large; font-weight: 500; padding-inline: 2%;">{{selectedVehicle.price}}$</span>
                 <span style="font-size: small;"> per day</span>
-                <button mat-raised-button color="primary" style="float: right;">RENT</button></span>
+                <button mat-raised-button color="primary" style="float: right;" (click)="rentVehicle(selectedVehicle.id)">RENT</button></span>
             </mat-card-actions>
         </mat-card>
 
