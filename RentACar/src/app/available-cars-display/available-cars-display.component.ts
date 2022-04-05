@@ -15,6 +15,10 @@ export class AvailableCarsDisplayComponent implements OnInit, AfterViewInit {
 
   public searchText: string = "";
   vehicles: Vehicle[] = [];
+  address : Address = {country:"", houseNumber:"", latitude:0, longitude:0, street:"", town:""};
+  selectedVehicle: Vehicle = {id: 0, model:'', details:'', price:0, address: this.address};
+  
+  isModalActive = false;
 
   @ViewChild('map') mapElement: any;
   map!: google.maps.Map;
@@ -57,5 +61,16 @@ export class AvailableCarsDisplayComponent implements OnInit, AfterViewInit {
       })
     }
   }
+
+  toggleModal(){
+    this.isModalActive = !this.isModalActive
+  }
+
+  showVehicle(vehicle: Vehicle){
+    this.selectedVehicle = vehicle;
+    this.isModalActive = true;
+  }
+
+ 
 
 }

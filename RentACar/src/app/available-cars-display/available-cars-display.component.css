@@ -46,18 +46,27 @@ td{
   padding: 1rem 2rem;
 }
 
-img {
-  
+img{
   box-shadow: 0 5px 10px #e1e5ee;
 }
 
 tr:nth-child(even){
   background-color: #f4f6fb;
 }
+.row:hover{
+  background-color:  lavender;
+}
 
 .price {
   text-align: right;
 }
+
+.example-card {
+  max-width: 100%;
+  text-align: left;
+  
+}
+
 
 
 /* Responsive layout - makes a one column-layout instead of a two-column layout */
