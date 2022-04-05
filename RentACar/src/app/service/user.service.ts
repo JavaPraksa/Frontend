@@ -32,5 +32,7 @@ export class UserService {
     return this.http.put('http://localhost:8082/user/'+ sessionStorage.getItem('username'),user);
   }
 
-  
+  logout() {
+    return this.http.put(userServiceApi + 'auth/logout', null)
+  }
 }

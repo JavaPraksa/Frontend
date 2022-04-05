@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
         sessionStorage.setItem('token', data.token)
         sessionStorage.setItem('role', data.role)
         sessionStorage.setItem('username', data.username)
+        sessionStorage.setItem('userId', data.id)
         this.redirectUser(data.role);
       },
       (error)=>{
@@ -43,7 +44,7 @@ export class LoginComponent implements OnInit {
       this.router.navigate([''])
     }
     else{
-      this.router.navigate(['user-profile']);
+      this.router.navigate(['rented-vehicle'])
     }
   }
 

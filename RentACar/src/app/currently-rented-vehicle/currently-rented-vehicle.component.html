@@ -1,0 +1,86 @@
+<app-navbar></app-navbar>
+<div class="overlay">
+    <section id="photo" class="d-flex flex-column justify-content-center">
+        <div class="container"></div>
+    </section>
+</div>
+<div class="center">
+    <section class="hero has-background-white">
+        <div class="hero-body">
+            <div class="columns">
+                <div class="column is-half">
+                    <table class="table is-hoverable is-fullwidth">
+                        <tbody>
+                            <tr>
+                                <td colspan="2">
+                                    <figure class="image has-text-centered is-3by2">
+                                        <img src="../../assets/images/background2.jpg">
+                                    </figure><br>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th>Vehicle</th>
+                                <td>{{rentedVehicle.model}}</td>
+                            </tr>
+                            <tr>
+                                <th>Start address</th>
+                                <td>{{rentedVehicle.street}} {{rentedVehicle.houseNumber}},
+                                    {{rentedVehicle.town}}, {{rentedVehicle.country}}</td>
+                            </tr>
+                            <tr>
+                                <th>Current duration</th>
+                                <td>{{getCurrentDuration()}} day/s</td>
+                            </tr>
+                            <tr>
+                                <th>Current cost</th>
+                                <td>{{getCurrentPrice()}} €</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <button mat-raised-button color="primary" (click)="toggleModal()">
+                                        Finish rent
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="column is-half" #map style="padding-inline: 1%;"></div>
+
+            </div>
+        </div>
+    </section>
+</div>
+
+<div class="modal" [ngClass]="{ 'is-active' : isModalActive }">
+    <div class="modal-background" (click)="toggleModal()"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title">Finish rent</p>
+            <button class="delete" aria-label="close" (click)="toggleModal()"></button>
+        </header>
+        <section class="modal-card-body has-text-left">
+            <div class="column is-fullwidth" #mapModal style="height: 400px; padding-inline: 1%;"></div>
+            <br>
+            <mat-form-field appearance="fill">
+                <mat-label>Select address</mat-label>
+                <mat-select [(value)]="selectedAddress" (selectionChange)="createMarkerForSelectedAddress()">
+                    <mat-option *ngFor="let address of addresses" [value]="address.id">
+                        {{address.id}}       {{address.street}} {{address.houseNumber}},
+                        {{address.town}}, {{address.country}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+        </section>
+        <footer class="modal-card-foot">
+            <button mat-raised-button color="primary" (click)="finishRent()" style="margin-right: 2%;">
+                Finish rent
+            </button>
+            <button mat-raised-button (click)="toggleModal()">
+                Close
+            </button>
+        </footer>
+    </div>
+</div>

@@ -5,13 +5,16 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { CurrentlyRentedVehicleComponent } from './currently-rented-vehicle/currently-rented-vehicle.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent },
   { path: 'user-profile',component : UserProfileComponent},
   { path: 'available-cars', component: AvailableCarsDisplayComponent },
-  {path: 'edit-profile/:username',component:EditProfileComponent}
+  {path: 'edit-profile/:username',component:EditProfileComponent},
+  { path: 'rented-vehicle', component: CurrentlyRentedVehicleComponent },
+  { path: '', pathMatch: 'full', redirectTo: 'rented-vehicle' },
 ];
 
 @NgModule({

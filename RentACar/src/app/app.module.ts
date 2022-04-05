@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,6 +26,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { RouterModule } from '@angular/router';
 import { AvailableCarsDisplayComponent } from './available-cars-display/available-cars-display.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { CurrentlyRentedVehicleComponent } from './currently-rented-vehicle/currently-rented-vehicle.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
     RegistrationComponent,
     UserProfileComponent,
     AvailableCarsDisplayComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    CurrentlyRentedVehicleComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,6 +58,8 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
     RouterModule.forRoot([
       {path: 'user-profile', component: UserProfileComponent},
     ]),
+    MatSnackBarModule,
+    ToastrModule.forRoot(),
 
   ],
   providers: [],
