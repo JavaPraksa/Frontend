@@ -21,10 +21,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { RouterModule } from '@angular/router';
 import { AvailableCarsDisplayComponent } from './available-cars-display/available-cars-display.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +33,8 @@ import { AvailableCarsDisplayComponent } from './available-cars-display/availabl
     LoginComponent,
     RegistrationComponent,
     UserProfileComponent,
-    AvailableCarsDisplayComponent
+    AvailableCarsDisplayComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,

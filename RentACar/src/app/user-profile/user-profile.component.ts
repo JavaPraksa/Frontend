@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { UserService } from '../service/user.service';
 import { LoginUser } from '../login/LoginUser';
 import { Router } from '@angular/router';
-
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 
 @Component({
@@ -16,13 +16,11 @@ import { Router } from '@angular/router';
 })
 export class UserProfileComponent implements OnInit {
   public user !: User
- 
-  loginUser = new LoginUser("", "")
 
 
   constructor(private http: HttpClient,private userService: UserService,private router : Router) { }
 
-
+  
   ngOnInit(): void {
     this.userService.grabUser().subscribe(data=> {this.user=data;})
   }
@@ -35,6 +33,9 @@ export class UserProfileComponent implements OnInit {
 
   }
 
+  editProfile(username : string) {
+      this.router.navigate(['edit-profile',username]);
+  }
   
 
 }
