@@ -1,0 +1,13 @@
+.mat-header{
+    background-color: blue;
+    
+}
+
+.button-header{
+    font-size: 13px;
+    
+}
+
+.button-header:hover{
+    background-color: aqua;
+}

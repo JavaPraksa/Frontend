@@ -1,32 +1,43 @@
- <form (ngSubmit)="onSubmit()">
-    <div class="form-group">
-        <label for ="firstName">First Name: </label>
-        <input type="text" class ="form-control" id="firstName"
-                [(ngModel)]="user.firstName" name="firstName">
-      </div>
+<!-- <form (ngSubmit)="onSubmit()">-->
+  <mat-card-header class="mat-header">
+  
+</mat-card-header>
 
-      <div>
-        <label for = "lastName">Last Name: </label>
-        <input type="text" class="form-control" id="lastName" 
-              [(ngModel)] ="user.lastName" name="lastName">
-      </div>
+  <mat-card>
+    <mat-card>First name: &nbsp;
+    <mat-form-field>
+      <input matInput type="text" class ="form-control" id="firstName"
+      [(ngModel)]="user.firstName" name="firstName">
+    </mat-form-field>
+  
+    <br> Last name: &nbsp;
+    <mat-form-field>
+      <input matInput type="text" class ="form-control" id="lastName"
+      [(ngModel)]="user.lastName" name="lastName">
+    </mat-form-field>
+  
+    <br> Username: &nbsp;
+    <mat-form-field>
+      <input matInput type="text" class ="form-control" id="username"
+      [(ngModel)]="user.username" name="username">
+    </mat-form-field>
 
-      <div class="form-group">
-        <label for="username">Username: </label>
-        <input type="text" class="form-control" id="lastName" 
-        [(ngModel)] ="user.username" name="username">
-      </div>
+    <br> Email: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+    <mat-form-field>
+      <input matInput type="text" class ="form-control" id="email"
+      [(ngModel)]="user.email" name="email">
+    </mat-form-field>
 
-      <div class="form-group">
-        <label for="email">Email: </label>
-        <input type="text" class="form-control" id="email" 
-        [(ngModel)] ="user.email" name="email">
-      </div> 
+    <br>
+    <button mat-button color="primary" class="button-header" (click)="onSubmit()"> Submit
+    
+    </button>
+    <button mat-button color="primary" class="button-header" (click)="goToUserProfile()">Cancel</button>
+
+  </mat-card>
+
     
       
-      <button class="btn btn-success" type="submit"> Submit
-    
-      </button>
-      <button (click)="goToUserProfile()">Cancel</button>
-  </form> 
+     
+
   
