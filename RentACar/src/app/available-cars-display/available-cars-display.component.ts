@@ -74,9 +74,11 @@ export class AvailableCarsDisplayComponent implements OnInit, AfterViewInit {
 
   rentVehicle(vehicleId: number) {
     var isSuccess = false;
-    this.rentService.startRent(vehicleId).subscribe((data)=>{ isSuccess = data;});
+    this.rentService.startRent(vehicleId).subscribe((data)=>{ 
+      isSuccess = data;
+      this.router.navigate(['rented-vehicle']);
+    });
 
-    this.router.navigate(['rented-vehicle']);
   }
 
 

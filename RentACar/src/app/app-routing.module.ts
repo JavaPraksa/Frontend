@@ -5,6 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { CurrentlyRentedVehicleComponent } from './currently-rented-vehicle/currently-rented-vehicle.component';
+import { RentHistoryComponent } from './rent-history/rent-history.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'user-profile',component : UserProfileComponent},
   { path: 'available-cars', component: AvailableCarsDisplayComponent },
   { path: 'rented-vehicle', component: CurrentlyRentedVehicleComponent },
+  { path: 'rent-history', component: RentHistoryComponent },
   { path: '', pathMatch: 'full', redirectTo: 'rented-vehicle' },
 ];
 

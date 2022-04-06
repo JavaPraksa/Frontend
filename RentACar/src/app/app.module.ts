@@ -26,6 +26,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { RouterModule } from '@angular/router';
 import { AvailableCarsDisplayComponent } from './available-cars-display/available-cars-display.component';
 import { CurrentlyRentedVehicleComponent } from './currently-rented-vehicle/currently-rented-vehicle.component';
+import { RentHistoryComponent } from './rent-history/rent-history.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { CurrentlyRentedVehicleComponent } from './currently-rented-vehicle/curr
     UserProfileComponent,
     AvailableCarsDisplayComponent,
     CurrentlyRentedVehicleComponent,
+    RentHistoryComponent,
   ],
   imports: [
     BrowserModule,

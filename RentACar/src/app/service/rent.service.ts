@@ -1,6 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { vehicleServiceApi } from '../app.consts';
+import { Rent } from '../rent-history/Rent';
 
 @Injectable({
   providedIn: 'root'
@@ -40,5 +42,13 @@ export class RentService {
     }
     var userId = sessionStorage.getItem('userId');
     return this.http.post<any>(vehicleServiceApi + 'rent/new', {clientId: userId, vehicleId: vid}, header);
+  }
+
+  getRentHistory(userId: any): Observable<Rent[]> {
+    var header = {
+      headers: new HttpHeaders()
+        .set('Authorization', `${sessionStorage.getItem('token')}`)
+    }
+    return this.http.get<Rent[]>(vehicleServiceApi + 'rent/history?clientId=' + userId, header)
   }
 }
