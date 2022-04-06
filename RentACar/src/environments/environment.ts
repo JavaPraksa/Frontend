@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  serverUrl: 'http://localhost',
+  userServer: 'http://localhost:8082/',
+  vehicleServer: 'http://localhost:8081/',
   apiUrl: 'https://reqres.in/'
 };
 
