@@ -1,0 +1,44 @@
+<!-- <form (ngSubmit)="onSubmit()">-->
+  <mat-card-header class="mat-header">
+  
+</mat-card-header>
+
+  <mat-card>
+    <mat-card>First name: &nbsp;
+    <mat-form-field>
+      <input matInput type="text" class ="form-control" id="firstName"
+      [(ngModel)]="user.firstName" name="firstName">
+    </mat-form-field>
+  
+    <br> Last name: &nbsp;
+    <mat-form-field>
+      <input matInput type="text" class ="form-control" id="lastName"
+      [(ngModel)]="user.lastName" name="lastName">
+    </mat-form-field>
+  
+    <br> Username: &nbsp;
+    <mat-form-field>
+      <input matInput type="text" class ="form-control" id="username"
+      [(ngModel)]="user.username" name="username" [disabled]="true">
+    </mat-form-field>
+
+    <br> Email: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+    <mat-form-field>
+      
+      <input matInput type="text" class ="form-control" id="email"
+      [(ngModel)]="user.email" name="email" >
+    </mat-form-field>
+
+    <br>
+    <button mat-button color="primary" class="button-header" (click)="onSubmit()"> Submit
+    
+    </button>
+    <button mat-button color="primary" class="button-header" (click)="goToUserProfile()">Cancel</button>
+
+  </mat-card>
+
+    
+      
+     
+
+  

@@ -1,6 +1,7 @@
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 //import { profile } from 'console';
 import { userServiceApi } from '../app.consts';
 import { LoginUser } from '../login/LoginUser';
@@ -11,6 +12,7 @@ import { User } from '../registration/User';
 })
 export class UserService {
 
+  
   constructor(private http: HttpClient) { }
 
   
@@ -20,6 +22,14 @@ export class UserService {
 
   register(user: User) {
     return this.http.post(userServiceApi + 'user/register', user)
+  }     
+
+  grabUser(): Observable<User> {
+    return this.http.get<User>(userServiceApi + 'user/' + sessionStorage.getItem('username'));
+  }
+
+  editUser(username:String,user: User) {
+    return this.http.put(userServiceApi +'user/'+ sessionStorage.getItem('username'),user);
   }
 
   logout() {

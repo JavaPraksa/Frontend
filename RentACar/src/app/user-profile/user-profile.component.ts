@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { User } from '../dto/user';
+import { User } from '../registration/User';
 import { userServiceApi } from '../app.consts';
 import { Observable } from 'rxjs';
 import { UserService } from '../service/user.service';
 import { LoginUser } from '../login/LoginUser';
 import { Router } from '@angular/router';
-
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 
 @Component({
@@ -16,27 +16,16 @@ import { Router } from '@angular/router';
 })
 export class UserProfileComponent implements OnInit {
   public user !: User
- 
-  loginUser = new LoginUser("", "")
 
 
   constructor(private http: HttpClient,private userService: UserService,private router : Router) { }
 
-
+  
   ngOnInit(): void {
-    this.grabUser().subscribe(data => {this.user = data;})
-    
+    this.userService.grabUser().subscribe(data=> {this.user=data;})
   }
 
-  grabUser(): Observable<User> {
-   // this.userService.login(this.loginUser).subscribe(
-     // (data : any)=>{
-      let logovani = sessionStorage.getItem('token')
-     //   sessionStorage.setItem('role', data.role)
-
-
-    return this.http.get<User>('http://localhost:8082/user/' + sessionStorage.getItem('username'));
-  }
+  
 
   logOut() {
     sessionStorage.clear();
@@ -44,6 +33,9 @@ export class UserProfileComponent implements OnInit {
 
   }
 
+  editProfile(username : string) {
+      this.router.navigate(['edit-profile',username]);
+  }
   
 
 }

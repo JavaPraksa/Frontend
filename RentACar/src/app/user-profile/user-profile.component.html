@@ -1,23 +1,30 @@
 <div id="basics">
+  <mat-card-header class="mat-header">
+  
    <!-- <img class="image" [src]=""/>-->
-    <h1>{{user.firstName + ' ' + user.lastName}}</h1>
-  </div>
-  
-  <form>
-      <div>
-          <label for ="firstName">First Name: {{user.firstName}}</label>
-          
-          <label for = "lastName">Last Name: {{user.lastName}}</label>
-
-          <label for="username">Username: {{user.username}}</label>
-         
-          <label for="email">Email:  {{user.email}}</label>
-         
-         
-      </div>
     
+    
+    <button mat-button color="primary" (click)="logOut()" class="button-header">Log out</button>
+    <button mat-button color="primary"(click)="editProfile(user.username)" class="button-header">Edit profile</button>
+  </mat-card-header>
+  </div>
+ 
+  
+
+  <mat-card class="example-card" >
+    <h1>{{user.firstName + ' ' + user.lastName}}</h1>
+     
+    <mat-card-content style="margin-left: 1%"> 
       
+          <mat-form-field appearance="legacy" style="width: 100%">
+            <mat-card>First name: {{user.firstName}}</mat-card>
+            <mat-card>Last name: {{user.lastName}}</mat-card>
+            <mat-card>Username:{{user.username}}</mat-card>
+            <mat-card>Email: {{user.email}}</mat-card>
+          </mat-form-field>
+          
+
+    
+      </mat-card-content> 
   
-    </form>
-    <button (click)="logOut()">Log out</button>
-  
+  </mat-card>
