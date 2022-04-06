@@ -19,13 +19,14 @@
     <br> Username: &nbsp;
     <mat-form-field>
       <input matInput type="text" class ="form-control" id="username"
-      [(ngModel)]="user.username" name="username">
+      [(ngModel)]="user.username" name="username" [disabled]="true">
     </mat-form-field>
 
     <br> Email: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
     <mat-form-field>
+      
       <input matInput type="text" class ="form-control" id="email"
-      [(ngModel)]="user.email" name="email">
+      [(ngModel)]="user.email" name="email" >
     </mat-form-field>
 
     <br>

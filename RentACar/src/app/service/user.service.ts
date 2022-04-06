@@ -25,11 +25,11 @@ export class UserService {
   }     
 
   grabUser(): Observable<User> {
-    return this.http.get<User>('http://localhost:8082/user/' + sessionStorage.getItem('username'));
+    return this.http.get<User>(userServiceApi + 'user/' + sessionStorage.getItem('username'));
   }
 
   editUser(username:String,user: User) {
-    return this.http.put('http://localhost:8082/user/'+ sessionStorage.getItem('username'),user);
+    return this.http.put(userServiceApi +'user/'+ sessionStorage.getItem('username'),user);
   }
 
   logout() {
