@@ -1,0 +1,28 @@
+<app-navbar></app-navbar>
+<div style="margin: 2%; margin-top: 3%;">
+    <h1 *ngIf="rents.length == 0" style="font-weight: 300; font-size: xx-large; padding: 1%; padding-left: 5%;">No previous rents.</h1>
+    <div  *ngIf="rents.length != 0" >
+        <h1 style="font-weight: 300; font-size: xx-large; padding: 1%; padding-left: 5%;">You previously rented...</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Car</th>
+                    <th>Start Address</th>
+                    <th>End Address</th>
+                    <th>Duration</th>
+                    <th class="price">Total Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class=row *ngFor="let rent of rents">
+                    <td>{{rent.model}}</td>
+                    <td>{{rent.startStreet}} {{rent.startHouseNumber}}, {{rent.startTown}}, {{rent.startCountry}}</td>
+                    <td>{{rent.endStreet}} {{rent.endHouseNumber}}, {{rent.endTown}}, {{rent.endCountry}}</td>
+                    <td>{{rent.days}} days</td>
+                    <td class="price">&euro; {{rent.price * rent.days}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

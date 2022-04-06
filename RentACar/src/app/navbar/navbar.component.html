@@ -1,8 +1,8 @@
 <mat-toolbar color="primary" class="navbar">
 
     <button mat-button style="font-size: 16px;" [routerLink]="['']">Profile</button>
-    <button mat-button style="font-size: 16px;" [routerLink]="['../available-cars']">Rent a Car</button>
-    <button mat-button style="font-size: 16px;" [routerLink]="['']">Rent History</button>
+    <button mat-button style="font-size: 16px;" [routerLink]="['/rented-vehicle']">Rent a Car</button>
+    <button mat-button style="font-size: 16px;" [routerLink]="['/rent-history']">Rent History</button>
 
     <span class="spacer"></span>
     <button style="font-size: 16px;" mat-button (click)='logout()'>Log out</button>
