@@ -6,6 +6,9 @@ import { Address } from './Address';
 import { Vehicle } from './Vehicle';
 import { } from 'googlemaps';
 import { ViewChild } from '@angular/core';
+import * as SockJS from 'sockjs-client';
+import { Stomp } from '@stomp/stompjs';
+import { vehicleServiceApi } from '../app.consts';
 
 @Component({
   selector: 'app-available-cars-display',
@@ -18,11 +21,14 @@ export class AvailableCarsDisplayComponent implements OnInit, AfterViewInit {
   vehicles: Vehicle[] = [];
   address: Address = { country: "", houseNumber: "", latitude: 0, longitude: 0, street: "", town: "" };
   selectedVehicle: Vehicle = { id: 0, model: '', details: '', price: 0, address: this.address };
+  marksers: google.maps.Marker[] = [];
 
   isModalActive = false;
 
   @ViewChild('map') mapElement: any;
   map!: google.maps.Map;
+
+  public stompClient: any;
 
   constructor(private vehicleService: VehicleService, private rentService: RentService, private router: Router) { }
 
@@ -41,7 +47,33 @@ export class AvailableCarsDisplayComponent implements OnInit, AfterViewInit {
       (error) => {
         this.router.navigate(['login']);
       })
+    this.connect()
   }
+
+  connect() {
+    const socket = new SockJS(vehicleServiceApi + 'vehicle-socket-endpoint');
+    this.stompClient = Stomp.over(function () {
+      return socket
+    });
+    const _this = this;
+
+    this.stompClient.connect({}, function (frame: any) {
+      console.log('Connected: ' + frame);
+
+      _this.stompClient.subscribe('/vehicle-socket/available-vehicles', function (data: any) {
+        _this.vehicles = JSON.parse(data.body).body;
+        _this.createMarkers();
+      });
+    });
+
+  }
+
+  rented() {
+    this.stompClient.send(
+      '/vehicle-socket/rent-change');
+  }
+
+
   initmap() {
     const mapProperties = {
       center: new google.maps.LatLng(45.251735, 19.837080),
@@ -51,15 +83,20 @@ export class AvailableCarsDisplayComponent implements OnInit, AfterViewInit {
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapProperties);
   }
   createMarkers() {
-    for(const vehicle of this.vehicles){
-      var data = {lat: vehicle.address.latitude, lng: vehicle.address.longitude}
+    for (var marker of this.marksers) {
+      marker.setMap(null)
+    }
+    this.marksers = [];
 
-      var marker = new google.maps.Marker({
+    for (const vehicle of this.vehicles) {
+      var data = { lat: vehicle.address.latitude, lng: vehicle.address.longitude }
+
+      this.marksers.push(new google.maps.Marker({
         position: data,
         map: this.map,
         title: vehicle.address.street,
         label: this.vehicles.filter((v) => v.address.latitude == data.lat && v.address.longitude == data.lng).length.toString()
-      })
+      }))
     }
   }
 
@@ -74,7 +111,8 @@ export class AvailableCarsDisplayComponent implements OnInit, AfterViewInit {
 
   rentVehicle(vehicleId: number) {
     var isSuccess = false;
-    this.rentService.startRent(vehicleId).subscribe((data)=>{ 
+    this.rentService.startRent(vehicleId).subscribe((data) => {
+      this.rented();
       isSuccess = data;
       this.router.navigate(['rented-vehicle']);
     });

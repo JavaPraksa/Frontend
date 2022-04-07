@@ -4,6 +4,9 @@ import { ToastrService } from 'ngx-toastr';
 import { RentService } from '../service/rent.service';
 import { } from 'googlemaps';
 import { ViewChild } from '@angular/core';
+import * as SockJS from 'sockjs-client';
+import { Stomp } from '@stomp/stompjs';
+import { vehicleServiceApi } from '../app.consts';
 
 @Component({
   selector: 'app-currently-rented-vehicle',
@@ -27,7 +30,9 @@ export class CurrentlyRentedVehicleComponent implements OnInit, AfterViewInit {
   isModalActive = false;
   addresses: any;
   selectedAddress: any;
-  modalMarker : any;
+  modalMarker: any;
+
+  public stompClient: any;
 
   ngOnInit(): void {
     if (sessionStorage.getItem('userId') == null) {
@@ -51,11 +56,11 @@ export class CurrentlyRentedVehicleComponent implements OnInit, AfterViewInit {
   }
 
   createMarkerForSelectedAddress() {
-    if(this.modalMarker != null || this.modalMarker != undefined)
+    if (this.modalMarker != null || this.modalMarker != undefined)
       this.modalMarker.setMap(null)
     this.modalMarker = null
 
-    var address = this.addresses.filter((a:any)=>a.id == this.selectedAddress)[0]
+    var address = this.addresses.filter((a: any) => a.id == this.selectedAddress)[0]
     var data = { lat: address.latitude, lng: address.longitude }
 
     this.modalMarker = new google.maps.Marker({
@@ -116,6 +121,7 @@ export class CurrentlyRentedVehicleComponent implements OnInit, AfterViewInit {
     }
     this.rentService.finishRent({ rentId: this.rentedVehicle.rentId, addressId: this.selectedAddress }).subscribe(
       (data) => {
+        this.connect();
         this.router.navigate(['available-cars']);
       },
       () => {
@@ -123,4 +129,20 @@ export class CurrentlyRentedVehicleComponent implements OnInit, AfterViewInit {
       }
     )
   }
+  connect() {
+    const socket = new SockJS(vehicleServiceApi + 'vehicle-socket-endpoint');
+    this.stompClient = Stomp.over(function () {
+      return socket
+    });
+    const _this = this;
+
+    this.stompClient.connect({}, function (frame: any) {
+      console.log('Connected: ' + frame);
+
+      _this.stompClient.send(
+        '/vehicle-socket/rent-change');
+    });
+
+  }
+
 }
