@@ -1,12 +1,14 @@
 <div id="basics">
-  <mat-card-header class="mat-header">
   
-   <!-- <img class="image" [src]=""/>-->
+  <mat-toolbar color="primary" class="navbar">
+
+    <button mat-button style="font-size: 16px;"  (click)="editProfile(user.username)" class="button-header">Edit profile</button>
+    <button mat-button style="font-size: 16px;" [routerLink]="['../available-cars']">Rent a Car</button>
+    <button mat-button style="font-size: 16px;" [routerLink]="['']">Rent History</button>
+    <button style="font-size: 16px;" mat-button (click)='logOut()'>Log out</button>
+    <span class="spacer"></span>
     
-    
-    <button mat-button color="primary" (click)="logOut()" class="button-header">Log out</button>
-    <button mat-button color="primary"(click)="editProfile(user.username)" class="button-header">Edit profile</button>
-  </mat-card-header>
+</mat-toolbar>
   </div>
  
   
