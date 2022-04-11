@@ -21,10 +21,13 @@ export class LoginComponent implements OnInit {
   login(): void{
     this.userService.login(this.loginUser).subscribe(
       (data : any)=>{
+        console.log(data)
         sessionStorage.setItem('token', data.token)
         sessionStorage.setItem('role', data.role)
         sessionStorage.setItem('username', data.username)
         sessionStorage.setItem('userId', data.id)
+        sessionStorage.setItem('email',data.email)
+        console.log(sessionStorage.getItem('email'))
         this.redirectUser(data.role);
       },
       (error)=>{
