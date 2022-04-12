@@ -27,6 +27,8 @@ import { RouterModule } from '@angular/router';
 import { AvailableCarsDisplayComponent } from './available-cars-display/available-cars-display.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { CurrentlyRentedVehicleComponent } from './currently-rented-vehicle/currently-rented-vehicle.component';
+import { AdminEditVehiclesComponent } from './admin-edit-vehicles/admin-edit-vehicles.component';
+import { EditVehicleComponent } from './edit-vehicle/edit-vehicle.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { CurrentlyRentedVehicleComponent } from './currently-rented-vehicle/curr
     AvailableCarsDisplayComponent,
     EditProfileComponent,
     CurrentlyRentedVehicleComponent,
+    AdminEditVehiclesComponent,
+    EditVehicleComponent,
   ],
   imports: [
     BrowserModule,

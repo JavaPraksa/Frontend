@@ -1,0 +1,34 @@
+<!-- <form (ngSubmit)="onSubmit()">-->
+    <mat-toolbar color="primary" class="navbar">
+    </mat-toolbar>
+
+  <mat-card>
+    <mat-card> Car model: &nbsp;
+    <mat-form-field>
+      <input matInput type="text" class ="form-control" id="model"
+      [(ngModel)]="vehiclefromDto.model" name="model">
+    </mat-form-field>
+  
+    <br> Address: &nbsp;
+    <mat-form-field>
+      <input matInput type="text" class ="form-control" id="address"
+      [(ngModel)]="vehiclefromDto.address" name="address">
+    </mat-form-field>
+  
+    <br> Price: &nbsp;
+    <mat-form-field>
+      <input matInput type="text" class ="form-control" id="price"
+      [(ngModel)]="vehiclefromDto.price" name="price" >
+    </mat-form-field>
+
+   
+    
+    <br>
+    <button mat-button color="primary" class="button-header" > Submit
+    
+    </button>
+    <button mat-button color="primary" class="button-header" (click)="cancel()">Cancel</button>
+
+  </mat-card>
+
+    

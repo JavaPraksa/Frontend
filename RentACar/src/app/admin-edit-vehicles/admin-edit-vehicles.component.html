@@ -1,0 +1,36 @@
+<mat-toolbar color="primary" class="navbar">
+
+    
+    <span class="spacer"></span>
+    <button style="font-size: 16px;" mat-button (click)='logout()'>Log out</button>
+</mat-toolbar>
+
+<div class="flex-container" style="margin-inline: 8%;">
+    <div class="flex-item-left" style="margin-block: 4%; padding-inline: 1%;">
+
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Car model</th>
+                    <th>Address</th>
+                    <th class="price">Price</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let vehicleFromDto of vehiclesFromDto">
+                    <td>{{vehicleFromDto.model}}</td>
+                    <td>{{vehicleFromDto.address.street}} {{vehicleFromDto.address.houseNumber}}, {{vehicleFromDto.address.town}},
+                        {{vehicleFromDto.address.country}}</td>
+                    <td class="price">&euro; {{vehicleFromDto.price}}</td>
+                    <td>
+                        <button class = "update-button" mat-button color="primary" (click)='editVehicle(vehicleFromDto.id)'>Update</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <div class="flex-item-right" #map style="margin-block: 4%; padding-inline: 1%; height: 400px;"></div>
+</div>

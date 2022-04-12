@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
   redirectUser(role: any) {
     //TODO: add url
     if(role == "ADMIN"){
-      this.router.navigate([''])
+      this.router.navigate(['admin-edit-vehicles'])
     }
     else{
       this.router.navigate(['rented-vehicle'])

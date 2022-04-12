@@ -6,6 +6,8 @@ import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { CurrentlyRentedVehicleComponent } from './currently-rented-vehicle/currently-rented-vehicle.component';
+import { AdminEditVehiclesComponent } from './admin-edit-vehicles/admin-edit-vehicles.component';
+import { EditVehicleComponent } from './edit-vehicle/edit-vehicle.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -15,6 +17,8 @@ const routes: Routes = [
   {path: 'edit-profile/:username',component:EditProfileComponent},
   { path: 'rented-vehicle', component: CurrentlyRentedVehicleComponent },
   { path: '', pathMatch: 'full', redirectTo: 'rented-vehicle' },
+  {path: 'admin-edit-vehicles',component:AdminEditVehiclesComponent},
+  {path:'edit-vehicle/:id',component:EditVehicleComponent}
 ];
 
 @NgModule({
