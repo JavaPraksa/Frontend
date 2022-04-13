@@ -19,6 +19,7 @@ export class AvailableCarsDisplayComponent implements OnInit, AfterViewInit {
 
   public searchText: string = "";
   vehicles: Vehicle[] = [];
+  allAvailableVehicles: Vehicle[] = [];
   address: Address = { country: "", houseNumber: "", latitude: 0, longitude: 0, street: "", town: "" };
   selectedVehicle: Vehicle = { id: 0, model: '', details: '', price: 0, address: this.address };
   marksers: google.maps.Marker[] = [];
@@ -42,6 +43,7 @@ export class AvailableCarsDisplayComponent implements OnInit, AfterViewInit {
     }
     this.vehicleService.getAvailableVehicles().subscribe((data) => {
       this.vehicles = data;
+      this.allAvailableVehicles = data;
       this.createMarkers();
     },
       (error) => {
@@ -119,6 +121,22 @@ export class AvailableCarsDisplayComponent implements OnInit, AfterViewInit {
 
   }
 
+
+  search() {
+    var searchWords = this.searchText.toLowerCase().split(" ");
+    this.vehicles = [];
+    const result = this.allAvailableVehicles.filter(vehicle => {
+      var isFound = true;
+      for (let sw of searchWords) {
+        if (!(vehicle.model.toLowerCase().includes(sw) || vehicle.address.country.toLowerCase().includes(sw) || vehicle.address.houseNumber.toLowerCase().includes(sw) || vehicle.address.street.toLowerCase().includes(sw) || vehicle.address.town.toLowerCase().includes(sw))) {
+          isFound = false;
+        }
+      }
+      if (isFound == true) {
+        this.vehicles.push(vehicle);
+      }
+    });
+  }
 
 
 }
